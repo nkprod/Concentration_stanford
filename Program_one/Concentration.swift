@@ -12,6 +12,8 @@ struct Concentration
 {
     private(set) var cards = [Card]()
     
+    var score = 0 
+    
     private var indexOfOneAndOnlyFaceUpCard: Int? {
         get{
             var foundIndex: Int?

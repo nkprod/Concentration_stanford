@@ -18,6 +18,7 @@ struct Card: Hashable
     
     var isFaceUp = false
     var isMatched = false
+    var hasBeenPicked: Bool = false
     private var identifier: Int
     
     

@@ -28,7 +28,7 @@ class ViewController: UIViewController
             .strokeWidth: 5.0,
             .strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
         ]
-        let attributedString = NSAttributedString(string: "Flips: \(flipCount)", attributes: attributes)
+        let attributedString = NSAttributedString(string: "Flips: \(flipCount+game.score)", attributes: attributes)
         flipCountLabel.attributedText = attributedString
     }
     
@@ -57,7 +57,7 @@ class ViewController: UIViewController
             let button = cardButtons[index]
             let card = game.cards[index]
             if card.isFaceUp{
-                button.setTitle(emoji(for:card), for: UIControlState.normal)
+                button.setTitle(emoji(for:card,theme: &theme), for: UIControlState.normal)
                 button.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
             }else{
                 button.setTitle("", for: UIControlState.normal)
@@ -66,13 +66,42 @@ class ViewController: UIViewController
         }
     }
     
-    private var emojiChoices = ["💀","👽","👺","🤡","🐊","🦅","👹","😈","🤖","🎃","🕺"]
+    
+    
+    @IBAction func newGameStarter(_ sender: UIButton) {
+        game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+        flipCount = 0
+        updateViewFromModel()
+    }
+    
+    
+    
+    @IBOutlet weak var gameTheme: UISegmentedControl!
+    var theme = [String]()
+
+    @IBAction func gameThemeChanger(_ sender: UISegmentedControl) {
+        switch gameTheme.selectedSegmentIndex {
+        case 0: theme = helloweenTheme
+        case 1: theme = nightTheme
+        case 2: theme = smilingTheme
+        case 3: theme = machineTheme
+        default: break
+        }
+    }
+    
+    var helloweenTheme = ["💀","👽","👺","🤡","🐊","🦅","👹","😈","🤖","🎃","🕺"]
+    var nightTheme = ["🌠","🌄","🌇","🎆","🌌","🔮","🌚","🌘","🌛","💥","⭐️"]
+    var smilingTheme = ["😀","😁","😆","🤣","🤩","🙃","😍","😇","😝","🤪","🤓"]
+    var machineTheme = ["🤖","🚗","🚕","🚙","🚌","🏎","🚓","🚑","🚜","🚒","🚆"]
+    
+        
+    
    
     private var emoji = Dictionary<Card, String>()
     
-    private func emoji(for card : Card) -> String{
-        if emoji[card] == nil ,emojiChoices.count > 0 {
-            emoji[card] = emojiChoices.remove(at: emojiChoices.count.arc4random)
+    private func emoji(for card : Card, theme: inout [String]) -> String{
+        if emoji[card] == nil ,theme.count > 0 {
+            emoji[card] = theme.remove(at: theme.count.arc4random)
         }
         return emoji[card] ?? "?"
     }
