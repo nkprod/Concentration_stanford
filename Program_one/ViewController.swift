@@ -11,6 +11,12 @@ import UIKit
 class ViewController: UIViewController
 {
     
+    
+    override func viewDidLoad() {
+        gameTheme.selectedSegmentIndex = 0
+        theme = helloweenTheme
+    }
+    
     private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
     
     var numberOfPairsOfCards: Int {
@@ -21,15 +27,33 @@ class ViewController: UIViewController
         didSet {
             updateFlipCountLabel()
         }
+    }
+    
+    private(set) var scoreCount = 0 {
+        didSet {
+            updateScoreCountLabel()
+        }
         
     }
+    
     private func updateFlipCountLabel() {
         let attributes: [NSAttributedStringKey: Any] = [
             .strokeWidth: 5.0,
             .strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
         ]
-        let attributedString = NSAttributedString(string: "Flips: \(flipCount+game.score)", attributes: attributes)
+        let attributedString = NSAttributedString(string: "Flips: \(flipCount)", attributes: attributes)
         flipCountLabel.attributedText = attributedString
+    }
+    
+    
+    
+    private func updateScoreCountLabel() {
+        let attributes: [NSAttributedStringKey: Any] = [
+            .strokeWidth: 5.0,
+            .strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+        ]
+        let attributedString = NSAttributedString(string: "Score: \(scoreCount)", attributes: attributes)
+        scoreLabel.attributedText = attributedString
     }
     
     @IBOutlet private weak var flipCountLabel: UILabel!{
@@ -37,12 +61,17 @@ class ViewController: UIViewController
             updateFlipCountLabel()
         }
     }
+
+    @IBOutlet weak var scoreLabel: UILabel!{
+        didSet{
+            updateScoreCountLabel()
+        }
+    }
     
     @IBOutlet private var cardButtons: [UIButton]!
     
     @IBAction private func touchCard(_ sender: UIButton) {
         
-        flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -53,9 +82,12 @@ class ViewController: UIViewController
     }
     
     private  func updateViewFromModel(){
+        flipCount = game.flips
+        scoreCount = game.score
         for index in cardButtons.indices{
             let button = cardButtons[index]
             let card = game.cards[index]
+    
             if card.isFaceUp{
                 button.setTitle(emoji(for:card,theme: &theme), for: UIControlState.normal)
                 button.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
@@ -69,23 +101,41 @@ class ViewController: UIViewController
     
     
     @IBAction func newGameStarter(_ sender: UIButton) {
+        game.resetCards()
         game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
         flipCount = 0
         updateViewFromModel()
     }
     
     
+//    enum emojiChoice{
+//        case helloweenTheme
+//        case nightTheme
+//        case smilingTheme
+//        case machineTheme
+//
+//        var emoji: [String]{
+//            switch self{
+//            case.helloweenTheme: return ["💀","👽","👺","🤡","🐊","🦅","👹","😈","🤖","🎃","🕺"]
+//            case.nightTheme: return ["🌠","🌄","🌇","🎆","🌌","🔮","🌚","🌘","🌛","💥","⭐️"]
+//            case.smilingTheme: return ["😀","😁","😆","🤣","🤩","🙃","😍","😇","😝","🤪","🤓"]
+//            case.machineTheme: return ["🤖","🚗","🚕","🚙","🚌","🏎","🚓","🚑","🚜","🚒","🚆"]
+//            }
+//        }
+//    }
+    
     
     @IBOutlet weak var gameTheme: UISegmentedControl!
-    var theme = [String]()
-
+    private var theme = [String]()
+    
+    
     @IBAction func gameThemeChanger(_ sender: UISegmentedControl) {
-        switch gameTheme.selectedSegmentIndex {
+        switch sender.selectedSegmentIndex {
         case 0: theme = helloweenTheme
         case 1: theme = nightTheme
         case 2: theme = smilingTheme
         case 3: theme = machineTheme
-        default: break
+        default: break;
         }
     }
     

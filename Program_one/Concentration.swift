@@ -12,7 +12,9 @@ struct Concentration
 {
     private(set) var cards = [Card]()
     
-    var score = 0 
+    private(set) var flips = 0
+    
+    private(set) var score = 0
     
     private var indexOfOneAndOnlyFaceUpCard: Int? {
         get{
@@ -38,21 +40,35 @@ struct Concentration
     
     mutating func chooseCard(at index: Int)
     {
+        
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): chosen index not in the cards")
-        if !cards[index].isMatched {
+        if !cards[index].isMatched && !cards[index].isFaceUp{
+            flips += 1
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index{
                 //Check if cards match
                 if cards[matchIndex] == cards[index]{
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
+                    score += 2
+                }else if cards[index].hasBeenPicked == true || cards[matchIndex].hasBeenPicked == true {
+                    score -= 1
                 }
+                
                 cards[index].isFaceUp = true
+                cards[matchIndex].hasBeenPicked = true
+                cards[index].hasBeenPicked = true
+                
             }else{
                 //Either no cards or two cards are face up
                 indexOfOneAndOnlyFaceUpCard = index
             }
         }
     }
+    
+    mutating func resetCards(){
+        cards.removeAll()
+    }
+    
     //Initializes new game with number that is quantity of cards in the game multiplied by two
     init(numberOfPairsOfCards: Int)
     {

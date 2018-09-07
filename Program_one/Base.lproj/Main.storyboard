@@ -18,12 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flips: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MwS-l9-vVZ">
-                                <rect key="frame" x="125.33333333333331" y="719" width="123.66666666666669" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="iFC-Rw-b62">
                                 <rect key="frame" x="16" y="44" width="343" height="232"/>
                                 <subviews>
@@ -164,8 +158,8 @@
                                     <action selector="gameThemeChanger:" destination="BYZ-38-t0r" eventType="valueChanged" id="eDz-1h-4pM"/>
                                 </connections>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sGW-Vt-Cpv">
-                                <rect key="frame" x="134" y="614" width="107" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sGW-Vt-Cpv">
+                                <rect key="frame" x="134" y="613" width="107" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="New Game">
                                     <color key="titleColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -174,19 +168,33 @@
                                     <action selector="newGameStarter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5qX-UG-nIr"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flips: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MwS-l9-vVZ">
+                                <rect key="frame" x="200.66666666666666" y="719" width="123.66666666666666" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOe-0g-jx8">
+                                <rect key="frame" x="41.333333333333329" y="719" width="142.66666666666669" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="iFC-Rw-b62" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="10w-WV-3eX"/>
-                            <constraint firstItem="MwS-l9-vVZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iFC-Rw-b62" secondAttribute="bottom" constant="8" symbolic="YES" id="1Hf-36-P7I"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MwS-l9-vVZ" secondAttribute="trailing" constant="50" id="2qd-BH-C0V"/>
                             <constraint firstItem="sGW-Vt-Cpv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="134" id="7UT-nG-MRZ"/>
                             <constraint firstItem="DGf-XE-gl8" firstAttribute="top" secondItem="sGW-Vt-Cpv" secondAttribute="bottom" constant="18" id="8E0-Ro-qnP"/>
+                            <constraint firstItem="gOe-0g-jx8" firstAttribute="top" secondItem="DGf-XE-gl8" secondAttribute="bottom" constant="30" id="BZo-Tk-pIs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MwS-l9-vVZ" secondAttribute="bottom" constant="11" id="FU9-yd-qtb"/>
                             <constraint firstItem="MwS-l9-vVZ" firstAttribute="top" secondItem="DGf-XE-gl8" secondAttribute="bottom" constant="30" id="PRc-vG-NkD"/>
+                            <constraint firstItem="sGW-Vt-Cpv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iFC-Rw-b62" secondAttribute="bottom" constant="8" symbolic="YES" id="Qgi-Tv-EfA"/>
                             <constraint firstItem="sGW-Vt-Cpv" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="bCb-vN-iPP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iFC-Rw-b62" secondAttribute="trailing" constant="16" id="bP7-46-IHD"/>
                             <constraint firstItem="iFC-Rw-b62" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="d2R-xO-wCO"/>
-                            <constraint firstItem="MwS-l9-vVZ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="rRB-43-NFz"/>
+                            <constraint firstItem="gOe-0g-jx8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="41.333333333333329" id="grW-Y9-H0K"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sGW-Vt-Cpv" secondAttribute="trailing" constant="134" id="ubl-Ud-pq1"/>
                             <constraint firstItem="DGf-XE-gl8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="v7r-Rd-yyQ"/>
                         </constraints>
@@ -195,6 +203,7 @@
                     <connections>
                         <outlet property="flipCountLabel" destination="MwS-l9-vVZ" id="IIu-5h-8TW"/>
                         <outlet property="gameTheme" destination="DGf-XE-gl8" id="kU0-WX-RKj"/>
+                        <outlet property="scoreLabel" destination="gOe-0g-jx8" id="8oZ-X4-eiH"/>
                         <outletCollection property="cardButtons" destination="831-NU-gu9" collectionClass="NSMutableArray" id="Qx7-DS-Pnd"/>
                         <outletCollection property="cardButtons" destination="bmv-33-cjU" collectionClass="NSMutableArray" id="CUD-UH-qNS"/>
                         <outletCollection property="cardButtons" destination="1gJ-hN-OhU" collectionClass="NSMutableArray" id="LpJ-MU-dFC"/>
